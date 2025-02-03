@@ -1,0 +1,13 @@
+
+<h1>Topic Creator</h1>
+<div class="form-center">
+    <form [formGroup]="topicform" (ngSubmit)="validation()">
+        <label for="topicName">Topic Name</label><br>
+        <input type="text" id="topicName" formControlName="topicName"/><br>
+        <label for="reason">Reason For Creating a Topic</label><br>
+        <input type="text" id="reason" formControlName="reason"/><br>
+        <label for="date">Reason For Creating a Topic</label> <br>      
+        <input type="date" id="date" formControlName="date"/><br>
+        <button type="submit">Create</button>
+    </form>  
+</div>

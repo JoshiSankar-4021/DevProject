@@ -1,0 +1,72 @@
+<div>
+    <h2 class="register">Registeration</h2>
+    <div class="form-center">
+        <Form [formGroup]="form">
+            <label>Profile Image</label><br>
+        
+            <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" alt="Image Preview" width="150" height="150"><br>
+            <input type="file" accept="image/*" (change)="onFileSelected($event)"><br>
+            <label for="firstName">First Name</label> <label style="color: red;">*</label><br>
+            <input type="text" id="firstName" formControlName="firstName" (input)="handle()"/>
+            <span style="color: red;" *ngIf="firstNamerequired===true">First Name is Required</span>
+            <br>
+            <label for="lastName">Last Name</label><br>
+            <input type="text" id="lastName" formControlName="lastName"/>
+            <br>
+            <label for="phnum">Phone</label><br>
+            <input type="text" id="phnum" formControlName="phnum"/>
+            <br>
+            <label for="email">Email</label><label style="color: red;">*</label><br>
+            <input type="email" id="email" formControlName="email" (input)="handle()"/><br>
+            <span style="color: red;" *ngIf="emailrequired===true">Email is Required</span>
+            <span style="color: red;" *ngIf="emailformat===true">Invalid Email</span>
+            <span style="color: red;" *ngIf="emailRegistered===true">This email is alredy registered pleas provide another Emai</span>
+            
+            <label for="address">Address</label><br>
+            <textarea id="address"formControlName="address"></textarea>
+            <br>
+            <label for="password">Password</label><label style="color: red;">*</label><br>
+            <input type="password" id="password" formControlName="password" (input)="handle()"/>
+            
+            <span style="color: red;" *ngIf="passwordrequired===true">Password  is Required</span>
+            <br>
+            <label for="gender">Male</label>
+            <input type="radio" id="gender" value="Male" formControlName="gender"/>
+            <label for="gender">Female</label>
+            <input type="radio" value="Female" id="gender" formControlName="gender"/>
+            <br>
+            <label for="physicallyHandicaped" >Physicall Challengd</label>
+            <input type="checkbox" formControlName="physicallyHandicaped">
+            <label for="isPhysicallyHandicaped" for="legalIssues">Any Legal Issues</label>
+            <input type="checkbox" formControlName="legalIssues"/><br>
+            <label for="education">Education</label>
+            <select formControlName="education" (change)="getId()">
+                <option [value]="0">Select</option>
+                <option [value]="edu.id" *ngFor="let edu of dbEducation">{{edu.qualification}}</option>
+            </select>
+            <br>
+            <label>Dob</label> <label style="color: red;">*</label> 
+            <input type="date" id="dob" formControlName="dob" (change)="ageCalculation()"(input)="handle() " [max]="maxDate | date:'yyyy-MM-dd'"/>
+            <span style="color: red;" *ngIf="dobrequired===true">Dob  is Required</span>
+            <br>
+            {{agedesc}}<br>
+            <div class="custom-file-input">
+                <label for="fileInput">Attach Your Documents</label><br>
+                <input id="fileInput"#fileInput accept=".jpg,.jpeg,.png,.pdf,.docx,.txt" type="file"(change)="onAdditionalFilesSelected($event)" multiple/>
+              </div>
+              <div *ngIf="otherSelectedFiles.length > 0">
+                <h3>Selected Files:</h3>
+                <ul>
+                  <li *ngFor="let file of otherSelectedFiles; let i = index">
+                    {{ file.name }}<br>
+                    <button (click)="removeselectedFile(i, fileInput)">Remove</button>
+                  </li>
+                </ul>
+              </div>
+            <br>
+            <button id="registerButton"type="submit" (click)="checkValidation()">Register</button> 
+            <p>Alredy had Account? <a routerLink="/">Login</a></p>
+            <a routerLink="/allusers">All Users</a>
+        </Form>
+    </div>
+</div>

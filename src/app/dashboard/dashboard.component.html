@@ -1,0 +1,41 @@
+<div>
+  <app-header class="header"></app-header>
+</div>
+<div class="dashboard-container">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened class="sidenav">
+      <mat-nav-list>
+        <mat-list-item *ngFor="let tab of tabs">
+          <a mat-button (click)="setActiveTab(tab.id)" [class.active]="activeTab === tab.id">
+            {{ tab.label }}
+          </a>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+      <div *ngIf="activeTab === 'profile'">
+        <app-profile></app-profile>
+      </div>
+      <div *ngIf="activeTab === 'createtopic'">
+        <app-createtopic></app-createtopic>
+      </div>
+      <div *ngIf="activeTab === 'reactions'">
+        <app-reactions></app-reactions>
+      </div>
+      <div *ngIf="activeTab === 'myOpinion'">
+        <app-my-opinion></app-my-opinion>
+      </div>
+      <div *ngIf="activeTab === 'bulk'">
+        <app-bulk-records></app-bulk-records>
+      </div>
+      <div *ngIf="activeTab === 'allusers'">
+        <app-allusers></app-allusers>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+<mat-toolbar color="primary" class="footer">
+  <span></span>
+</mat-toolbar>

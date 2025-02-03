@@ -1,0 +1,55 @@
+<H1>My Reactions</H1>
+<form [formGroup]="reactionForm" (ngSubmit)="update(reactionId)">
+<table>
+    <h3>Update</h3>
+        <tr>
+            <td>
+                <input id="comment" formControlName="comment" type="text"/>
+            </td>
+        </tr>
+        <!-- <tr>
+            <td>
+                <label for="hobby">Hobby</label>
+               <select formControlName="hobby">
+                <option>Running</option>
+                <option>Browsing</option>
+                <option>Listening Music</option>
+               </select>
+            </td>
+        </tr> -->
+        <!-- <tr>
+            <td>
+                <input type="date" formControlName="date"/>
+            </td>
+        </tr> -->
+        <!-- <tr>
+            <td>
+                <label>{{days}} {{months}} {{years}}</label>
+            </td>
+        </tr> -->
+        <tr>
+            <td>
+                <button>Comment</button>
+            </td>
+        </tr>
+</table>
+</form>
+<div class="table-container">
+    <table *ngIf="userComments.length!=0">
+        <tbody>
+        <tr>
+         <th>Id</th>
+         <th>My Reaction</th>
+         <th>Date</th>
+         <th>Modify</th>
+         <th>Delete</th>
+        </tr>
+        <tr *ngFor="let basic of userComments">
+         <td>{{basic.id}}</td>
+         <td>{{basic.comment}}</td>
+         <td>{{basic.date}}</td>
+         <td><button (click)="edit(basic.id)" class="updateButton">Edit</button></td>
+         <td><button (click)="onDelete(basic.id)" class="deleteButton">Delete</button></td> 
+        </tr>
+    </tbody>
+   </table>

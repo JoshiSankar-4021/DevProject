@@ -1,0 +1,106 @@
+<h4 class="profile" class="title">User Profile</h4>
+<div class="form-centr">
+  <form [formGroup]="form" (ngSubmit)="save(id)">
+    
+    <label>Profile Image</label><br>
+    <div *ngIf="imagePreviewUrl">
+      <img [src]="imagePreviewUrl" alt="Profile Image Preview" width="150" height="150"/>
+    </div><br>
+    <input type="file" accept="image/*" (change)="onFileSelected($event)"><br>
+    <br>
+    <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" id="firstName" formControlName="firstName"/>
+      <mat-error *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched">
+        First Name is required.
+      </mat-error>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" id="lastName" formControlName="lastName"/>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Phone</mat-label>
+      <input matInput type="text" id="phnum" formControlName="phnum"/>
+      <mat-error *ngIf="form.get('phnum')?.invalid && form.get('phnum')?.touched">
+        Enter a valid 10-digit phone number.
+      </mat-error>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" id="email" formControlName="email"/>
+      <mat-error *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+        Enter a valid email address.
+      </mat-error>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <input matInput type="text" id="address" formControlName="address"/>
+    </mat-form-field><br>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" id="password" formControlName="password"/>
+      <mat-error *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+        Password must be at least 4 characters long.
+      </mat-error>
+    </mat-form-field><br>
+
+    <mat-radio-group formControlName="gender">
+      <mat-radio-button value="Male">Male</mat-radio-button>
+      <mat-radio-button value="Female">Female</mat-radio-button>
+    </mat-radio-group><br>
+
+    <mat-checkbox formControlName="physicallyHandicaped">Physically Challenged</mat-checkbox>
+
+    <mat-checkbox formControlName="legalIssues">Any Legal Issues</mat-checkbox><br>
+
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Education</mat-label>
+      <mat-select formControlName="education">
+        <mat-option [value]="0">Select</mat-option>
+        <mat-option *ngFor="let edu of dbEducation" [value]="edu.id">{{edu.qualification}}</mat-option>
+      </mat-select>
+      </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dob" (dateChange)="onDateChange($event)" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div>{{agedesc}}</div><br>
+
+    <mat-label>Additional Files</mat-label>
+    <div *ngIf="otheradditionalFiles.length > 0; else noFiles">
+      <ul>
+        <li *ngFor="let file of otheradditionalFiles">
+          <a (click)="downloadFile(file.fileName)">{{ file.originalName }}</a> 
+          <button type="button" (click)="deleteFile(file.id, file.filePath)">Delete</button>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noFiles>
+      <p>No additional files found.</p>
+    </ng-template><br>
+    <div *ngIf="otherSelectedFiles.length > 0">
+      <h4>Selected Files:</h4>
+      <ul>
+        <li *ngFor="let file of otherSelectedFiles; let i = index">
+          {{ file.name }}
+          <button type="button" (click)="removeselectedFile(i,file)">Remove</button>
+        </li>
+      </ul>
+      </div>
+    <div class="custom-file-input">
+      <label for="fileInput">Choose Files</label>
+      <input id="fileInput" type="file" (change)="onAdditionalFilesSelected($event)" multiple/>
+    </div><br>
+    <button class="updatebutton" type="submit">UPDATE</button> 
+  </form>
+</div>

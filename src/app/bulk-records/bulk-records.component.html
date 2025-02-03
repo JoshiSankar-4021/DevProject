@@ -1,0 +1,4 @@
+<h2>Add Users in Bulk</h2>
+<h5>Upload Excel File</h5>
+<input type="file" (change)="onFileSelected($event)" accept=".xls,.xlsx" />
+<button (click)="onUpload()" [disabled]="!selectedFile">Upload</button>

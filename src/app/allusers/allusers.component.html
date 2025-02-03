@@ -1,0 +1,29 @@
+<div>
+    <input [(ngModel)]="searchKeyword" placeholder="Search Users" (input)="onSearch()" />
+    <table align="center">
+    <tbody>
+        <tr>
+            <th (click)="changeSort('id')">Id</th>
+            <th (click)="changeSort('firstName')">First Name</th>
+            <th (click)="changeSort('lastName')">LastName</th>
+            <th (click)="changeSort('dob')">DOB</th>
+            <th (click)="changeSort('email')">E-mail</th>
+            <th>update</th>
+            <th>delete</th>
+        </tr>
+        <tr *ngFor="let user of paginaationUsers">
+            <td>{{user.id}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.dob}}</td>
+            <td>{{user.email}}</td>
+            <td><button (click)="edit(user.id)">Edit</button> </td>
+            <td><button (click)="delete(user.id)">Delete</button></td>
+        </tr> 
+    </tbody>
+</table>
+<div class="pagination-controls" >
+    <button (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+    <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
+  </div>

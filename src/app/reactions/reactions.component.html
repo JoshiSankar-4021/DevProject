@@ -1,0 +1,23 @@
+<h1>Reactions</h1>
+<div class="scrollable-container">
+<form [formGroup]="reactionForm">
+    <div *ngFor="let topic of alltopic" class="topic-container">
+        <div class="topic-title">
+            {{ topic.topicName }}<br>
+            Reason:{{topic.reason}}
+        </div>
+        <div class="comment-form">
+            <label for="comment"></label>
+            <input id="comment" formControlName="comment" type="text" placeholder="Add a comment..." />
+            <button (click)="addComment(topic.id)">Comment</button>
+        </div>
+        <div class="comments-section">
+            <ng-container *ngFor="let reaction of allReaction">
+                <div *ngIf="reaction.topicId == topic.id" class="comment-box">
+                    {{ reaction.comment }}
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</form>
+</div>

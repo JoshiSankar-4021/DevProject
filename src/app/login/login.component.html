@@ -1,0 +1,13 @@
+<div class="background-container">
+    <h1 align="center" style="color: antiquewhite;">Topic Reactor</h1>
+    <h2 align="center" style="color: white;">Login</h2>
+    <div class="form-center">
+        <form [formGroup]="loginform" (ngSubmit)="login()" class="loginform">
+            <input formControlName="email" type="email" placeholder="Email" /><br>
+            <input formControlName="password" type="password" placeholder="Password" /><br>
+            <button type="submit" class="l">Login</button><br>
+    <p align="center" style="color: white;">Already have an account? <a routerLink="/register" style="color: white;">Register</a></p>
+</form>
+    </div>
+    
+</div>

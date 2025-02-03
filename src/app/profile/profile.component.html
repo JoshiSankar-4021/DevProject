@@ -1,0 +1,78 @@
+<h1 class="profile">My Profile</h1>
+<div class="form-centr">
+<Form [formGroup]="form" (ngSubmit)="save(id)">
+       <label>Profile Image</label><br>
+       <div *ngIf="imagePreviewUrl">
+        <img [src]="imagePreviewUrl"  accept="image/*" alt="Profile Image Preview" width="150" height="150"/>
+      </div><br>
+            <input type="file"  accept="image/*" (change)="onFileSelected($event)"><br>
+            <label for="firstName">First Name</label><label style="color: red;">*</label><br>
+            <input type="text" id="firstName" formControlName="firstName" (change)="save(id)"/>
+            <div *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched" style="color: red;">
+              First Name is required.
+            </div><br>   
+            <label for="lastName">Last Name</label><br>
+            <input type="text" id="lastName" formControlName="lastName" (change)="save(id)"/><br>
+            <label for="phnum">Phone</label><br>
+            <input type="text" id="phnum" formControlName="phnum" (change)="save(id)"/>
+            <div *ngIf="form.get('phnum')?.invalid && form.get('phnum')?.touched" style="color: red;">
+              Enter a valid 10-digit phone number.
+            </div><br>
+            <label for="email">Email</label><label style="color: red;">*</label><br>
+            <input type="email" id="email" formControlName="email" (change)="save(id)"/>
+            <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" style="color: red;">
+              Enter a valid email address.
+            </div><br>
+            <label for="address">Address</label><br>
+            <input type="text" id="address" formControlName="address" (change)="save(id)"/><br>
+            <label for="password">Password</label><label style="color: red;">*</label><br>
+            <input type="password" id="password" formControlName="password" (change)="save(id)"/>
+            <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" style="color: red;" class="input-with-symbol">
+              Password must be at least 4 characters long.
+            </div><br>
+            <label for="gender">Male</label>
+            <input type="radio" id="gender" value="Male" formControlName="gender" (change)="save(id)"/>
+            <label for="gender">Female</label>
+            <input type="radio" value="Female" id="gender" formControlName="gender" (change)="save(id)"/><br>
+            <label for="physicallyHandicaped" >Physicall Challengd</label>
+            <input type="checkbox" formControlName="physicallyHandicaped" (change)="save(id)">
+            <label for="isPhysicallyHandicaped" for="legalIssues" >Any Legal Issues</label>
+            <input type="checkbox" formControlName="legalIssues" (change)="save(id)"/><br>
+            <label for="education">Education</label>
+            <select formControlName="education" (change)="getId()">
+                <option [value]="0">Select</option>
+                <option [value]="edu.id" *ngFor="let edu of dbEducation">{{edu.qualification }}</option>
+            </select><br>
+            <label>Dob</label><label style="color: red;">*</label> 
+            <input type="date" id="dob" formControlName="dob" (change)="onDateChange($event)"/><br>
+            {{agedesc}}<br>
+            <label>Additional Files</label>
+            <div>
+              <div *ngIf="otheradditionalFiles.length > 0; else noFiles">
+                <ul>
+                  <li *ngFor="let file of otheradditionalFiles">
+                    <a (click)="downloadFile(file.fileName)">{{ file.originalName }}</a> <br>
+                    <button type="button" (click)="deleteFile(file.id,file.filePath)">Delete</button>
+                  </li>
+                </ul>
+              </div>
+              <ng-template #noFiles>   
+                <p>No additional files found.</p>
+              </ng-template>
+            </div>
+            <div class="custom-file-input">
+              <label for="fileInput">Choose Files</label>
+              <input id="fileInput"#fileInput type="file"(change)="onAdditionalFilesSelected($event)" multiple/>
+            </div>
+          <div *ngIf="otherSelectedFiles.length > 0">
+            <h4>Selected Files:</h4>
+            <ul>
+              <li *ngFor="let file of otherSelectedFiles; let i = index">
+                {{ file.name }}
+                <button type="button" (click)="removeselectedFile(i, fileInput)">Remove</button>
+              </li>
+            </ul>
+          </div>
+            <button>UPDATE</button> 
+    </Form>
+  </div>
