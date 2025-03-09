@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 tabs=[ { id: 'profile', label: 'Profile' },
-  // { id: 'createtopic', label: 'Create Topic' },
-  // { id: 'reactions', label: 'Reactions' },
-  // { id: 'myOpinion', label: 'My Opinion' },
+  { id: 'createtopic', label: 'Create Topic' },
+  { id: 'reactions', label: 'Reactions' },
+  { id: 'myOpinion', label: 'My Opinion' },
   { id: 'bulk', label: 'Bulk' },
   { id: 'allusers', label: 'All Users' }]
 activeTab: string='profile';
