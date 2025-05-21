@@ -1,5 +1,5 @@
 <H1>My Reactions</H1>
-<form [formGroup]="reactionForm" (ngSubmit)="update(reactionId)">
+<form [formGroup]="reactionForm" (ngSubmit)="update()">
 <table>
     <h3>Update</h3>
         <tr>
@@ -7,26 +7,13 @@
                 <input id="comment" formControlName="comment" type="text"/>
             </td>
         </tr>
-        <tr>
-            <td>
-                <label for="hobby">Hobby</label>
-               <select formControlName="hobby">
-                <option>Running</option>
-                <option>Browsing</option>
-                <option>Listening Music</option>
-               </select>
-            </td>
-        </tr> 
+
          <tr>
             <td>
                 <input type="date" formControlName="date"/>
             </td>
         </tr> 
-         <tr>
-            <td>
-                <label>{{days}} {{months}} {{years}}</label>
-            </td>
-        </tr>
+    
         <tr>
             <td>
                 <button>Comment</button>
